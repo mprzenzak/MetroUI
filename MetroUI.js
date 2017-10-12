@@ -2,23 +2,30 @@ var rows = 0;
 var columns = 0;
 
 //mozna tu przyporzadkowac wprowadzone wartosci
-x = 10;
-y = 8;
+x = 7;
+y = 5;
 
-function createGrid(x)
+//function createGrid()
+$(document).ready(function () {
 for (rows = 0; rows < x; rows++) {
     for (columns = 0; columns < y; columns++) {
-        $(".Tile").appendTo("#TileBox");
+        //var Tile = $("<div class='Tile' style='position:absolute'></div>");
+   // Tile.appendTo('#container');
+        $("<div>").addClass("Tile").appendTo("#TileBox");
+        //var Tile = $("<div class='Tile'></div>").append("#TileBox");
+      //  Tile
         //var Tile = $("div class='Tile'style='position:absolute'></div>");
         //Tile.appendTo('#TileBox');
         //$("#TileBox").append("<div class = 'Tile'></div>");
     }
 }
+}
+)
 // $(".Tile").width(y);
 // $(".Tile").height(x);
-$(document).ready(function () {
-    createGrid();
-})
+// $(document).ready(function () {
+//     createGrid();
+// })
 
 
 
