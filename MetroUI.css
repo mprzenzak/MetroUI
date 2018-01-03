@@ -1,8 +1,12 @@
-tile{
+.tile{
   /* width: 50px;
   height: 50px; */
-  padding: 10px;
+  padding: 50px;
   margin: 15;
   border: 1px solid;
   background-color: red;  
+}
+.tileContainer{
+  width: 100px;
+  height: 100px;
 }
