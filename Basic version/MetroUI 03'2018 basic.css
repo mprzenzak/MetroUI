@@ -1,0 +1,33 @@
+#container {
+	position: relative;
+	margin:auto;
+	height:800px;
+	width:800px;
+}
+
+.grid {
+	outline:5px solid white;
+	/* border-radius: 10px; */
+	margin:0;
+	padding:0;
+	border:none;
+    background-color: #212121;  
+	display:inline-block;
+}
+.input{
+    width: 15%;
+    background-color: #757575;
+    font-size: 18px;
+    border: 3px;
+    height: 4%;
+	border-radius: 5px;
+	color: white;
+}
+    html {
+    font-family: 'Arial';
+}
+.startBtn{
+	background-color: #4b4b4b;
+	border-radius: 10px;
+	color: white;
+}
