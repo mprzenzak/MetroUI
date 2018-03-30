@@ -4,8 +4,8 @@
 	height:800px;
 	width:800px;
 }
-
-.grid {
+.grid{
+	/* content: var(--content , "test"); */
 	outline:5px solid white;
 	/* border-radius: 10px; */
 	margin:0;
@@ -13,6 +13,11 @@
 	border:none;
     background-color: #212121;  
 	display:inline-block;
+}
+.grid ::before{
+	/* content: "displaycontent"; */
+	color: red;
+	content: attr(--data-name);
 }
 .input{
     width: 15%;
@@ -23,7 +28,7 @@
 	border-radius: 5px;
 	color: white;
 }
-    html {
+html {
     font-family: 'Arial';
 }
 .startBtn{
