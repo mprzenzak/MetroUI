@@ -5,7 +5,6 @@
 	width:800px;
 }
 .grid{
-	/* content: var(--content , "test"); */
 	outline:5px solid white;
 	/* border-radius: 10px; */
 	margin:0;
@@ -13,11 +12,7 @@
 	border:none;
     background-color: #212121;  
 	display:inline-block;
-}
-.grid ::before{
-	/* content: "displaycontent"; */
-	color: red;
-	content: attr(--data-name);
+	color: white;
 }
 .input{
     width: 15%;
@@ -29,10 +24,14 @@
 	color: white;
 }
 html {
-    font-family: 'Arial';
+	font-family: 'Arial';
 }
 .startBtn{
 	background-color: #4b4b4b;
 	border-radius: 10px;
 	color: white;
+}
+#textDisplay{
+	height:800px;
+	width:800px;
 }
