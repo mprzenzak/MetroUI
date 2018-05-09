@@ -1,10 +1,7 @@
 function createGrid(x, y) {
     for (var cols = 0; cols < x; cols++) {
         for (var rows = 0; rows < y; rows++) {
-            $('#container').append("<div class='grid'>\
-            <div class='nameDisplay'>defaultUsername<span id='usernameSpan'> unchanged</span></div>\
-            </div>");
-            //$('.nameDisplay').append('#container');
+            $('#container').append("<div class='grid'><div id = 'usernameSpace'></div></div>");
         };
     };
     $('.grid').width(800 / x);
@@ -42,12 +39,22 @@ function getData(count) {
 }
 function textDisplay() {
     var data = getData(1);
-    var username = "";
+    //var username = "";
+    username = "";
     $.each(data, function (i, { name, surname }) {
         username += ` ${name} ${surname}`;
     });
-    $(".nameDisplay").html(username);
+    //$(".nameDisplay").html(username);
 }
-//$('.nameDisplay').innerHTML = changedUsername;
-//$('#usernameSpan').text('changedUsername');
-//$('#usernameSpan').html('changedUsername');
+
+function AssignUsername(id, content) {/////////////////////////////////////nie moge zastąpić id klasa
+    var container = document.getElementById(id);
+    //var container = $('#id');///////////////////////////////nie działa
+    container.innerHTML = content;
+}
+
+$(document).ready(function () {
+    $(".startBtn").click(function () {
+        AssignUsername('usernameSpace', username);
+    });
+});
