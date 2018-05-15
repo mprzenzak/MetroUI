@@ -1,7 +1,7 @@
 function createGrid(x, y) {
     for (var cols = 0; cols < x; cols++) {
         for (var rows = 0; rows < y; rows++) {
-            $('#container').append("<div class='grid'><div id = 'usernameSpace'></div></div>");
+            $('#container').append("<div class='grid'><div class = 'usernameSpace'></div></div>");
         };
     };
     $('.grid').width(800 / x);
@@ -18,7 +18,7 @@ function refreshGrid() {
 $(document).ready(function () {
     $(".startBtn").click(function () {
         refreshGrid();
-        AssignUsername('usernameSpace', username);
+        AssignUsername('.usernameSpace', username);
         textDisplay();
     });
 });
@@ -54,9 +54,9 @@ function textDisplay() {
     //$(".nameDisplay").html(username);
 }
 
-function AssignUsername(id, content) {/////////////////////////////////////nie moge zastąpić id klasa
-    var container = document.getElementById(id);
-    //var container = $('.Class');
-    //var container = $('#id');///////////////////////////////nie działa
-    container.innerHTML = content;
+function AssignUsername(ClassName, content) {
+    //var container = document.getElementById(id);
+    var container = $('".” + ClassName');
+    //container.innerHTML = content;
+    $(container).html(content);
 }
