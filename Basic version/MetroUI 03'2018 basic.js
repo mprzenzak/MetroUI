@@ -10,7 +10,7 @@ function createGrid(x, y) {
 function refreshGrid() {
     var x = $("#colsNumber")[0].value;
     var y = $("#rowsNumber")[0].value;
-    var count = x * y;
+    count = x * y;
 
     $('.grid').remove();
     createGrid(x, y);
@@ -18,6 +18,8 @@ function refreshGrid() {
 $(document).ready(function () {
     $(".startBtn").click(function () {
         refreshGrid();
+        AssignUsername('usernameSpace', username);
+        textDisplay();
     });
 });
 function getData(count) {
@@ -37,8 +39,13 @@ function getData(count) {
     }
     return result
 }
+
 function textDisplay() {
-    var data = getData(1);
+    var x = $("#colsNumber")[0].value;
+    var y = $("#rowsNumber")[0].value;
+    var numberOfTiles = x * y;
+    console.log(numberOfTiles);
+    var data = getData(numberOfTiles);
     //var username = "";
     username = "";
     $.each(data, function (i, { name, surname }) {
@@ -49,12 +56,7 @@ function textDisplay() {
 
 function AssignUsername(id, content) {/////////////////////////////////////nie moge zastąpić id klasa
     var container = document.getElementById(id);
+    //var container = $('.Class');
     //var container = $('#id');///////////////////////////////nie działa
     container.innerHTML = content;
 }
-
-$(document).ready(function () {
-    $(".startBtn").click(function () {
-        AssignUsername('usernameSpace', username);
-    });
-});
