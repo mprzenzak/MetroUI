@@ -1,6 +1,7 @@
 function createGrid(x, y) {
     for (var cols = 0; cols < x; cols++) {
         for (var rows = 0; rows < y; rows++) {
+            numberOfTiles = x * y;
             $('#container').append("<div class='grid'><div class = 'usernameSpace'></div></div>");
         };
     };
@@ -10,27 +11,19 @@ function createGrid(x, y) {
 function refreshGrid() {
     var x = $("#colsNumber")[0].value;
     var y = $("#rowsNumber")[0].value;
-    count = x * y;
-
     $('.grid').remove();
     createGrid(x, y);
 };
-$(document).ready(function () {
-    $(".startBtn").click(function () {
-        refreshGrid();
-        AssignUsername('.usernameSpace', username);
-        textDisplay();
-    });
-});
+
 function getData(count) {
-    var names = ["Michal", "Jan", "Katarzyna", "Andrzej", "Jozef", "Bartek", "Mikolaj", "Tomasz", "Julian", "Brajan", "Dzesika"];
-    var surnames = ["Noga", "Kowalski", "Nowak", "Pazura", "Duda", "Komorowski", "Tomczyk", "Jozefowicz", "Lechicki", "Goldberg"];
-    var result = [];
+    var names = ["Michal ", "Jan ", "Katarzyna ", "Andrzej ", "Jozef ", "Bartek ", "Mikolaj ", "Tomasz ", "Julian ", "Brajan ", "Dzesika "];
+    var surnames = ["Noga ", "Kowalski ", "Nowak ", "Pazura ", "Duda ", "Komorowski ", "Tomczyk ", "Jozefowicz ", "Lechicki ", "Goldberg "];
+    result = [];
 
     for (var i = 0; i < count; i++) {
         var randomNameIndex = Math.floor(Math.random() * names.length);
         var randomSurnameIndex = Math.floor(Math.random() * surnames.length);
-        name = names[randomNameIndex];
+        var name = names[randomNameIndex];
         var surname = surnames[randomSurnameIndex];
         result.push({
             name: name,
@@ -41,22 +34,25 @@ function getData(count) {
 }
 
 function textDisplay() {
-    var x = $("#colsNumber")[0].value;
-    var y = $("#rowsNumber")[0].value;
-    var numberOfTiles = x * y;
-    console.log(numberOfTiles);
     var data = getData(numberOfTiles);
-    //var username = "";
-    username = "";
+    var username = [];
+    
     $.each(data, function (i, { name, surname }) {
-        username += ` ${name} ${surname}`;
+        username.push(` ${name} ${surname}`);
     });
-    //$(".nameDisplay").html(username);
-}
 
-function AssignUsername(ClassName, content) {
-    //var container = document.getElementById(id);
-    var container = $('".” + ClassName');
-    //container.innerHTML = content;
+    $(".usernameSpace").each(function (index) {
+        $(this).html(username[index]);
+    })
+}
+function AssignUsername(Class, content) {
+    var container = document.getElementsByClassName(Class);
     $(container).html(content);
 }
+
+$(document).ready(function () {
+    $(".startBtn").click(function () {
+        refreshGrid();
+        textDisplay();
+    });
+});
