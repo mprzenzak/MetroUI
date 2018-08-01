@@ -36,7 +36,7 @@ function getData(count) {
 function textDisplay() {
     var data = getData(numberOfTiles);
     var username = [];
-    
+
     $.each(data, function (i, { name, surname }) {
         username.push(` ${name} ${surname}`);
     });
@@ -45,14 +45,62 @@ function textDisplay() {
         $(this).html(username[index]);
     })
 }
-function AssignUsername(Class, content) {
-    var container = document.getElementsByClassName(Class);
-    $(container).html(content);
-}
+
+(function ($) {
+    $.fn.customizeTile = function (options) {
+        var settings = $.extend({
+            backgroundColor: "#212121",
+            columnCount:1
+        }, options);
+        return this.each(function () {
+
+            if (settings.backgroundColor) {
+                $(this).css('backgroundColor', settings.backgroundColor);
+            }
+
+            if (settings.columnCount) {
+                $(this).css('columnCount', settings.columnCount);
+            }
+
+            // if (settings.data) {
+            //     $(this).text(getData(4), settings.data);
+            // }
+
+            if ($.isFunction(settings.complete)) {
+                settings.complete.call(this);
+            }
+        });
+    }
+})(jQuery);
+
+(function($){
+    $.fn.customizeText = function(options){
+        var settings=$.extend({
+            text: getData(numberOfTiles) 
+        },options);
+        return this.each(function(){
+
+            // if (settings.text) {
+            //     $(this).html('text', settings.text);
+            // }
+
+            if ($.isFunction(settings.complete)) {
+                settings.complete.call(this);
+            }
+        })
+    }
+
+    // $(".usernameSpace").each(function () {
+    //     $(this).html(getData(10));
+    //         //+"michal pierdziel"+" michal pierdziel"+" michal pierdziel"+" michal pierdziel"+" michal pierdziel"+" michal pierdziel"+" michal pierdziel"+" michal pierdziel"+" michal pierdziel");
+    // })
+})(jQuery); 
 
 $(document).ready(function () {
     $(".startBtn").click(function () {
         refreshGrid();
         textDisplay();
+        $('.grid').customizeTile();
+        $('.usernameSpace').customizeText();
     });
 });

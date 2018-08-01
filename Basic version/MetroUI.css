@@ -6,7 +6,6 @@
 }
 .grid{
 	outline:5px solid white;
-	/* border-radius: 10px; */
 	margin:0;
 	padding:0;
 	border:none;
@@ -31,10 +30,6 @@ html {
 	border-radius: 10px;
 	color: white;
 }
-#textDisplay{
-	height:800px;
-	width:800px;
+.newspaper{
+	column-count: 2;
 }
-/* #usernameSpace{
-	width: 50px;
-} */
