@@ -1,4 +1,5 @@
 function createGrid(x, y) {
+    $('.grid').remove();
     for (var cols = 0; cols < x; cols++) {
         for (var rows = 0; rows < y; rows++) {
             numberOfTiles = x * y;
@@ -8,10 +9,8 @@ function createGrid(x, y) {
     $('.grid').width(800 / x);
     $('.grid').height(800 / x);
 };
-function refreshGrid() {
-    var x = $("#colsNumber")[0].value;
-    var y = $("#rowsNumber")[0].value;
-    $('.grid').remove();
+
+function refreshGrid(x, y) {
     createGrid(x, y);
 };
 
@@ -33,7 +32,30 @@ function getData(count) {
     return result
 }
 
-function textDisplay() {
+function getOptions(options) {
+    var settings = $.extend({
+        columns: 2,
+        data: 0,
+        backgroundColor: "#212121",
+        columnCount: 1
+    }, options);
+    return settings;
+}
+
+function renderGrid(abcd, settings) {
+    var x = settings.columns;
+    var y = result.length / x;
+    refreshGrid(x, y);
+}
+
+function colorTiles(grid, options) {
+    $(".grid").each(function (index) {
+        $(this).css('backgroundColor', getOptions(options).backgroundColor);
+        return this;
+    })
+}
+
+function fillTilesWithContent(abcd, options) {
     var data = getData(numberOfTiles);
     var username = [];
 
@@ -42,65 +64,38 @@ function textDisplay() {
     });
 
     $(".usernameSpace").each(function (index) {
-        $(this).html(username[index]);
+        var namesTab = [];
+        for (i = 0; i <= result.length - 1; i++) {
+            namesTab.push(username[index]);
+        }
+        $(this).html(namesTab);
+        return this;
+    })
+}
+
+function columnCountSet(abcd,options){
+    $(".grid").each(function (index) {
+        $(this).css('columnCount', getOptions(options).columnCount);
+        return this;
     })
 }
 
 (function ($) {
-    $.fn.customizeTile = function (options) {
-        var settings = $.extend({
-            backgroundColor: "#212121",
-            columnCount:1
-        }, options);
+    $.fn.tiles = function (options) {
+     
+        var settings = getOptions(options);
+
         return this.each(function () {
 
-            if (settings.backgroundColor) {
-                $(this).css('backgroundColor', settings.backgroundColor);
-            }
+            var grid = renderGrid(this, options);
 
-            if (settings.columnCount) {
-                $(this).css('columnCount', settings.columnCount);
-            }
+            fillTilesWithContent(this, options);
 
-            // if (settings.data) {
-            //     $(this).text(getData(4), settings.data);
-            // }
+            colorTiles(this, options);
 
-            if ($.isFunction(settings.complete)) {
-                settings.complete.call(this);
-            }
+            columnCountSet(this,options);
+            
+            return grid;
         });
     }
 })(jQuery);
-
-(function($){
-    $.fn.customizeText = function(options){
-        var settings=$.extend({
-            text: getData(numberOfTiles) 
-        },options);
-        return this.each(function(){
-
-            // if (settings.text) {
-            //     $(this).html('text', settings.text);
-            // }
-
-            if ($.isFunction(settings.complete)) {
-                settings.complete.call(this);
-            }
-        })
-    }
-
-    // $(".usernameSpace").each(function () {
-    //     $(this).html(getData(10));
-    //         //+"michal pierdziel"+" michal pierdziel"+" michal pierdziel"+" michal pierdziel"+" michal pierdziel"+" michal pierdziel"+" michal pierdziel"+" michal pierdziel"+" michal pierdziel");
-    // })
-})(jQuery); 
-
-$(document).ready(function () {
-    $(".startBtn").click(function () {
-        refreshGrid();
-        textDisplay();
-        $('.grid').customizeTile();
-        $('.usernameSpace').customizeText();
-    });
-});
