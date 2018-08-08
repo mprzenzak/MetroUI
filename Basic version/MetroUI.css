@@ -1,7 +1,13 @@
 #container {
 	position: relative;
 	margin:auto;
-	height:800px;
+	/* height:800px; */
+	width:800px;
+}
+#container2 {
+	position: relative;
+	margin:auto;
+	/* height:800px; */
 	width:800px;
 }
 .grid{
